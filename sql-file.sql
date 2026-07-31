@@ -1,14 +1,14 @@
-CREATE DATABASE IF NOT EXISTS user;
+CREATE DATABASE IF NOT EXISTS users;
 
-USE user;
+USE users;
 
-CREATE TABLE IF NOT EXISTS `users` (
-	user_id int(11) NOT NULL AUTO_INCREMENT,
-	user_email varchar(50) NOT NULL,
-	user_pass varchar(32) NOT NULL,
-	user_fname varchar(50) NOT NULL,
-	CONSTRAINT PK_user_id PRIMARY KEY(user_id),
-	CONSTRAINT UK_user_email UNIQUE(user_email)
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO users VALUES(1, 'yusufsezer@mail.com', MD5('123456'), 'Yusuf Sezer');
+INSERT INTO users (name, email, password)
+VALUES ('Shaik Mahammad Shafi', 'shaikshafi@mail.com', MD5('123456'));

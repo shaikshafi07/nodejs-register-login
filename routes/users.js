@@ -32,7 +32,7 @@ router.post('/register', helpers.loginChecker, function (req, res, next) {
     return;
   }
 
-  var sqlQuery = `INSERT INTO users VALUES(NULL, ?, MD5(?), ?)`;
+  var sqlQuery = `INSERT INTO users (email, password, name) VALUES (?, MD5(?), ?)`;
   var values = [req.body.email, req.body.psw, req.body.fname];
 
   db.query(sqlQuery, values, function (err, results, fields) {
@@ -90,7 +90,7 @@ router.post('/login', function (req, res, next) {
     return;
   }
 
-  var sqlQuery = `SELECT * FROM users WHERE user_email = ? AND user_pass = MD5(?)`;
+  var sqlQuery = `SELECT * FROM users WHERE email = ? AND password = MD5(?)`;
   var values = [req.body.email, req.body.psw];
 
   db.query(sqlQuery, values, function (err, results, fields) {
@@ -103,7 +103,7 @@ router.post('/login', function (req, res, next) {
 
     if (results.length == 1) {
       req.session.authorised = true;
-      req.session.fname = results[0].user_fname
+      req.session.fname = results[0].name
       res.redirect('/');
       return;
     } else {
