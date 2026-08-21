@@ -9,6 +9,7 @@
   "keywords": [],
   "scripts": {
     "start": "node ./bin/www"
+    "test": "jest --coverage"
   },
   "dependencies": {
     "cookie-parser": "~1.4.6",
